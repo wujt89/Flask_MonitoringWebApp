@@ -1,0 +1,40 @@
+<div id="chart" class="chart">
+    <div class="chartDS-item">
+        <p class="chart-p">DS Mode</p>
+        <canvas id="chart1" max-height="500"></canvas>
+    </div>
+</div>
+
+<script>
+    var ctx1 = document.getElementById("chart1").getContext("2d");
+    var lineChart1 = new Chart(ctx1, {
+        type: "line",
+        data: {
+            labels: {{ labels | safe }},
+    datasets: [
+        {
+            label: "Temperature Values",
+            data: {{ valuesDS | safe }},
+        fill: true,
+        borderColor: "#00b4d8",
+        lineTension: 0.1
+                }
+    ]
+        },
+    options: {
+        resposive: false,
+            legend: {
+            display: false
+        },
+        tooltips: {
+            callbacks: {
+                label: function(tooltipItem) {
+                    return tooltipItem.yLabel;
+                }
+            }
+        },
+        animation: false
+    }
+    })
+
+</script>

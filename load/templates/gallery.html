@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+
+
+{% block gallery %}
+<div style="align-items: center;">
+    <div class="gallery" id="gallery">
+        <img src="/static/css/images/05122022_04:18:58.jpg" width="500" height="600">
+    </div>
+</div>
+
+{% endblock %}
+
+
+{% block script %}
+<script>
+    var table = {{ table | safe}}
+    var timeStamp = {{ timeStamp | safe}}
+    var container = document.getElementById("gallery");
+    container.innerHTML = "";
+
+    for (var i = table.length-1; i > -1; i--) {
+        var newDiv = document.createElement("div");
+        newDiv.className = "gallery-item";
+        var newImg = document.createElement("img");
+        newImg.src = "/static/css/images/" + table[i];
+        newImg.height = "225";
+        newImg.width = "400";
+        newImg.className = "gallery-photo";
+        newDiv.appendChild(newImg)
+        var newP = document.createElement("p")
+        var text = document.createTextNode(`${timeStamp[i]}`);
+        newP.className = "gallery-paragraph"
+        newP.appendChild(text);
+        newDiv.appendChild(newP)
+        container.appendChild(newDiv);
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,32 @@
+<div class="map" id="map">
+    <button onclick="sendSensorInfoDS4()" id="SensorDS4" class="button-photo">{{SensorDS4}}</button>
+    <button onclick="sendSensorInfoDS5()" id="SensorDS5" class="button-photo">{{SensorDS5}}</button>
+    <button onclick="sendSensorInfoDS3()" id="SensorDS3" class="button-photo">{{SensorDS3}}</button>
+    <button onclick="sendSensorInfoDS6()" id="SensorDS6" class="button-photo">{{SensorDS6}}</button>
+    <button onclick="sendSensorInfoDS2()" id="SensorDS2" class="button-photo">{{SensorDS2}}</button>
+    <button onclick="sendSensorInfoDS7()" id="SensorDS7" class="button-photo">{{SensorDS7}}</button>
+    <button onclick="sendSensorInfoDS1()" id="SensorDS1" class="button-photo">{{SensorDS1}}</button>
+    <button onclick="sendSensorInfoDS8()" id="SensorDS8" class="button-photo">{{SensorDS8}}</button>
+    <button onclick="sendSensorInfoIR1()" id="SensorIR1" class="button-photo">{{SensorIR1}}</button>
+    <button onclick="sendSensorInfoIR8()" id="SensorIR8" class="button-photo">{{SensorIR8}}</button>
+    <button onclick="sendSensorInfoIR2()" id="SensorIR2" class="button-photo">{{SensorIR2}}</button>
+    <button onclick="sendSensorInfoIR7()" id="SensorIR7" class="button-photo">{{SensorIR7}}</button>
+    <button onclick="sendSensorInfoIR3()" id="SensorIR3" class="button-photo">{{SensorIR3}}</button>
+    <button onclick="sendSensorInfoIR6()" id="SensorIR6" class="button-photo">{{SensorIR6}}</button>
+    <button onclick="sendSensorInfoIR4()" id="SensorIR4" class="button-photo">{{SensorIR4}}</button>
+    <button onclick="sendSensorInfoIR5()" id="SensorIR5" class="button-photo">{{SensorIR5}}</button>
+</div>
+
+
+<script>
+    var buttonTableOK = {{ buttonOk | safe }}
+    var buttonTableNOK = {{ buttonNok | safe }}
+    console.log(buttonTableNOK[0].substr(0, 9));
+
+    buttonTableOK.forEach(element => {
+        document.getElementById(element.substr(0, 9)).style.backgroundColor = "rgba(0, 255, 0, 0.5)";
+    });
+    buttonTableNOK.forEach(element => {
+        document.getElementById(element.substr(0, 9)).style.backgroundColor = "rgba(255, 0, 0, 0.5)";
+    });
+</script>

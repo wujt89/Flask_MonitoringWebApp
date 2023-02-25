@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+
+
+{% block gallery %}
+<div id="alert-container" class="alert-container">
+    <div id="alert-item-1" class="alert-item-1">
+        <img src="" alt="">
+    </div>
+    <div class="alert-item-2" id="alert-item-2">
+        <p style="font-size: 24px; margin-bottom: 20px">Set Alarms in the form below:</>
+        <form class="alert-form" action="javascript:sendAlertValue()">
+            <label for="typename"> Choose Sensor Type: </label>
+            <select name="typename" id="types" value="balue">
+                <option value="SensorDS">DS18B20</option>
+                <option value="SensorIRAm">MLX90614 - Ambient</option>
+                <option value="SensorIROb">MLX90614 - Object</option>
+            </select> 
+            <label for="sensorname"> Choose Sensor Number: </label>
+            <select name="sensorName" id="names" value="value">
+                <option value="1">Sensor1</option>
+                <option value="2">Sensor2</option>
+                <option value="3">Sensor3</option>
+                <option value="4">Sensor4</option>
+                <option value="5">Sensor5</option>
+                <option value="6">Sensor6</option>
+                <option value="7">Sensor7</option>
+                <option value="8">Sensor8</option>
+            </select>
+            <label for="alertValue"> Type in Alert Value (use "." for floats): </label>
+            <input type="text" id="alert" name="alert" value="25.5">
+            <input type="submit" id="submitButton" value="Submit">
+        </form>
+    </div>
+    <div class="alert-item-3" id="alert-item-3"> </div>
+</div>
+
+{% endblock %}
+
+{% block script %}
+<script>
+    function sendAlertValue() {
+        var typeValue = document.getElementById("types").value;
+        var nameValue = document.getElementById("names").value;
+        var alertValue = document.getElementById("alert").value;
+        if(typeValue!='SensorDS')
+        {
+            typeValue = typeValue.slice(0, 8) + nameValue + typeValue.slice(8,10);
+            
+        } else {
+            typeValue = typeValue + nameValue;
+        }
+        let alertInfo = {
+            'sensor': String(typeValue),
+            'value': String(alertValue)
+        }
+        console.log(alertInfo)
+        const request = new XMLHttpRequest()
+        request.open('POST', `/processAlertInfo/${JSON.stringify(alertInfo)}`)
+        request.onload = () => {
+            const flaskMessage = request.responseText
+        }
+        request.send()
+    }
+
+    var table = {{ table | safe}}
+    for (let i = 0; i < table.length; i++) {
+        var para = document.createElement("p");
+        var text = document.createTextNode(table[i]);
+        para.appendChild(text);
+        document.getElementById("alert-item-3").appendChild(para);
+    }
+
+</script>
+{% endblock %}
+
+

@@ -1,0 +1,75 @@
+<div id="chart" class="chart">
+    <div class="chart1">
+        <p class="chart-p">Object Mode</p>
+        <canvas id="chart1"></canvas>
+    </div>
+    <div class="chart1">
+        <p class="chart-p">Ambient Mode</p>
+        <canvas id="chart2"></canvas>
+    </div>
+</div>
+
+<script>
+    var ctx1 = document.getElementById("chart1").getContext("2d");
+    var lineChart1 = new Chart(ctx1, {
+        type: "line",
+        data: {
+            labels: {{ labels | safe }},
+    datasets: [
+        {
+        label: "Temperature Values",
+        data: {{ values | safe }},
+        fill: true,
+        borderColor: "#00b4d8",
+        lineTension: 0.1
+                }
+    ]
+        },
+    options: {
+        resposive: false,
+            legend: {
+            display: false
+        },
+        tooltips: {
+            callbacks: {
+                label: function(tooltipItem) {
+                    return tooltipItem.yLabel;
+                }
+            }
+        },
+        animation: false
+    }
+    })
+
+    var ctx2 = document.getElementById("chart2").getContext("2d");
+    var lineChart2 = new Chart(ctx2, {
+        type: "line",
+        data: {
+            labels: {{ labels | safe }},
+    datasets: [
+        {
+            label: "Temperature Values",
+            data: {{ values2 | safe}},
+            fill: true,
+            borderColor: "#00b4d8",
+            lineTension: 0.1
+                }
+    ]
+        },
+    options: {
+        resposive: false,
+            legend: {
+            display: false
+        },
+        tooltips: {
+            callbacks: {
+                label: function(tooltipItem) {
+                    return tooltipItem.yLabel;
+                }
+            }
+        },
+        animation: false
+    }
+    })
+
+</script>

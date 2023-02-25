@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+  <head>
+    <link rel="stylesheet" type=text/css href="{{ url_for('static', filename='css/main.css')}}">
+    <script src="{{ url_for('static', filename='js/home.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/chart.min.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/turbo.js')}}"></script>
+    <meta http-equiv="refresh" content="1000">
+    <title>Turbo-Flask Streams Demo</title>
+    {{ turbo() }}
+  </head>
+  <body>
+    <nav class="navigation">
+      <ul class="navigation-link">
+        <li class="navigation-logo" >
+          <img  src="/static/css/logo.png" width="50px" height="50px" alt="">
+          <a href="{{ url_for('index') }}"> </a>
+        </li>
+        <li class="navigation-item">
+          <a href="{{ url_for('index') }}"> Charts </a>
+        </li>
+        <li class="navigation-item">
+          <a href="{{ url_for('gallery') }}"> Photo Gallery </a>
+        </li>
+        <li class="navigation-item">
+          <a href="{{ url_for('alert') }}"> Alarms </a>
+        </li>
+      </ul>
+    </nav>
+          {% block content %} {% endblock %}
+          {% block chart %} {% endblock %}
+          {% block gallery %} {% endblock %}
+
+  </body>
+  {% block script %} {% endblock %}
+</html>
